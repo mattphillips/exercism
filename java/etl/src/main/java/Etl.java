@@ -9,9 +9,9 @@ public class Etl {
 		
 		for (Integer key : old.keySet()) {
 
-			for (String s : old.get(key)) {
+			for (String character : old.get(key)) {
 
-				newScoring.put(s.toLowerCase(), key);
+				newScoring.put(character.toLowerCase(), key);
 			}
 		}
 
