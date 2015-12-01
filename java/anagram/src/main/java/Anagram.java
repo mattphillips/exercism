@@ -7,7 +7,7 @@ public class Anagram {
 	private final String word;
 
 	public Anagram(final String word) {
-		this.word = word.toLowerCase();
+		this.word = word;
 	}
 
 	public List<String> match(final List<String> possibleAnagrams) {
@@ -18,8 +18,8 @@ public class Anagram {
 	}
 
 	private String sortString(final String str) {
-		char[] sArr = str.toLowerCase().toCharArray();
-		Arrays.sort(sArr);
-		return new String(sArr);
+		char[] strChars = str.toLowerCase().toCharArray();
+		Arrays.sort(strChars);
+		return new String(strChars);
 	}
 }
