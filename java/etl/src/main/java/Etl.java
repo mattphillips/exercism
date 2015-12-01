@@ -7,11 +7,11 @@ public class Etl {
 		
 		Map<String, Integer> newScoring = new HashMap<>();
 		
-		for (Integer key : old.keySet()) {
+		for (Integer point : old.keySet()) {
 
-			for (String character : old.get(key)) {
+			for (String letter : old.get(point)) {
 
-				newScoring.put(character.toLowerCase(), key);
+				newScoring.put(letter.toLowerCase(), point);
 			}
 		}
 
