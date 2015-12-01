@@ -12,8 +12,8 @@ public class Anagram {
 
 	public List<String> match(final List<String> possibleAnagrams) {
 		return possibleAnagrams.stream()
-				.filter(pa -> !(word.equalsIgnoreCase(pa))) // check if the possible anagram is identical to the word
-				.filter(x -> sortString(word).equals(sortString(x))) // check the word and anagram are equal
+				.filter(pa -> !(word.equalsIgnoreCase(pa))) // filter if the possible anagram is not identical to the word
+				.filter(x -> sortString(word).equals(sortString(x))) // filter if the word and anagram are equal
 				.collect(Collectors.toList());
 	}
 
