@@ -8,9 +8,8 @@ public class Hamming {
 		int distance = 0;
 		
 		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) != t.charAt(i)) {
+			if (s.charAt(i) != t.charAt(i))
 				distance++;
-			}
 		}
 		
 		return distance;
