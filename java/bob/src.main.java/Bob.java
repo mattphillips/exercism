@@ -28,7 +28,7 @@ public class Bob {
 	}
 
 	private boolean isMessageShouting(final String message) {
-		if((message.contains("ä") || message.contains("ö") || message.contains("ü")))
+		if ((message.contains("ä") || message.contains("ö") || message.contains("ü")))
 			return false;
 
 		return message.matches(SHOUTING_IDENTIFIER);
