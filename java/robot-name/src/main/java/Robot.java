@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.IntFunction;
 
 public class Robot {
@@ -16,17 +18,26 @@ public class Robot {
 	private static final int DIGIT_RANGE_MAX = 10;
 
 	private String name;
-
+	private Set<String> previousNames;
+	
 	public Robot() {
 		name = generateName();
+		previousNames = new HashSet<>();
 	}
 
 	public String getName() {
-		return name.isEmpty() ? name = generateName() : name;
+		return name;
 	}
 
 	public void reset() {
-		name = EMPTY_DELIMITER;
+		previousNames.add(name);
+		
+		String temp = generateName();
+		while (previousNames.contains(temp)) {
+			temp = generateName();
+		}
+		
+		name = temp;
 	}
 
 	private String generateName() {
