@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.function.IntFunction;
-import java.util.stream.IntStream;
 
 public class Robot {
 
@@ -38,34 +37,30 @@ public class Robot {
 	}
 
 	private String generateRandomLetters(final int length) {
-		return generateSequenceFromMapper(length, new IntFunction<String>() {
+		return generateSequenceFromMapper(LETTER_RANGE_MIN, LETTER_RANGE_MAX, length, new IntFunction<String>() {
 			@Override
 			public String apply(int value) {
-				return String.valueOf((char) (getRandomInt(LETTER_RANGE_MIN, LETTER_RANGE_MAX) + CAPITAL_A));
+				return String.valueOf((char) (value + CAPITAL_A));
 			}
 		});
 	}
 
 	private String generateRandomDigits(final int length) {
-		return generateSequenceFromMapper(length, new IntFunction<String>() {
+		return generateSequenceFromMapper(DIGIT_RANGE_MIN, DIGIT_RANGE_MAX, length, new IntFunction<String>() {
 			@Override
 			public String apply(int value) {
-				return String.valueOf(getRandomInt(DIGIT_RANGE_MIN, DIGIT_RANGE_MAX));
+				return String.valueOf(value);
 			}
 		});
 	}
 
-	private String generateSequenceFromMapper(final int length, final IntFunction<String> mapper) {
-		return IntStream.range(0, length)
+	private String generateSequenceFromMapper(
+			final int min, final int max, final int length, final IntFunction<String> mapper) {
+		return new Random()
+				.ints(min, max)
+				.limit(length)
 				.mapToObj(mapper)
 				.reduce((acc, next) -> String.join(EMPTY_DELIMITER, acc, next))
 				.get();
-	}
-
-	private int getRandomInt(final int min, final int max) {
-		return new Random()
-				.ints(min, max)
-				.findFirst()
-				.getAsInt();
 	}
 }
