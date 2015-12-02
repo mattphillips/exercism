@@ -36,28 +36,28 @@ public class Robot {
 		while (previousNames.contains(temp)) {
 			temp = generateName();
 		}
-		
 		name = temp;
 	}
 
 	private String generateName() {
 		return String.join(
 				EMPTY_DELIMITER, 
-				generateRandomLetters(LENGTH_OF_SEQUENCE_OF_LETTERS),
-				generateRandomDigits(LENGTH_OF_SEQUENCE_OF_DIGITS));
+				generateRandomLetters(LETTER_RANGE_MIN, LETTER_RANGE_MAX, LENGTH_OF_SEQUENCE_OF_LETTERS, CAPITAL_A),
+				generateRandomDigits(DIGIT_RANGE_MIN, DIGIT_RANGE_MAX, LENGTH_OF_SEQUENCE_OF_DIGITS));
 	}
 
-	private String generateRandomLetters(final int length) {
-		return generateSequenceFromMapper(LETTER_RANGE_MIN, LETTER_RANGE_MAX, length, new IntFunction<String>() {
+	private String generateRandomLetters(
+			final int rangeMin, final int rangeMax, final int sequenceLength, char offset) {
+		return generateSequenceFromMapper(rangeMin, rangeMax, sequenceLength, new IntFunction<String>() {
 			@Override
 			public String apply(int value) {
-				return String.valueOf((char) (value + CAPITAL_A));
+				return String.valueOf((char) (value + offset));
 			}
 		});
 	}
 
-	private String generateRandomDigits(final int length) {
-		return generateSequenceFromMapper(DIGIT_RANGE_MIN, DIGIT_RANGE_MAX, length, new IntFunction<String>() {
+	private String generateRandomDigits(final int rangeMin, final int rangeMax, final int sequenceLength) {
+		return generateSequenceFromMapper(rangeMin, rangeMax, sequenceLength, new IntFunction<String>() {
 			@Override
 			public String apply(int value) {
 				return String.valueOf(value);
@@ -66,11 +66,11 @@ public class Robot {
 	}
 
 	private String generateSequenceFromMapper(
-			final int min, final int max, final int length, final IntFunction<String> mapper) {
+			final int rangeMin, final int rangeMax, final int sequenceLength, final IntFunction<String> intToStringMapper) {
 		return new Random()
-				.ints(min, max)
-				.limit(length)
-				.mapToObj(mapper)
+				.ints(rangeMin, rangeMax)
+				.limit(sequenceLength)
+				.mapToObj(intToStringMapper)
 				.reduce((acc, next) -> String.join(EMPTY_DELIMITER, acc, next))
 				.get();
 	}
