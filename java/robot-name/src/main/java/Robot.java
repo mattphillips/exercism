@@ -21,8 +21,8 @@ public class Robot {
 	private Set<String> previousNames;
 	
 	public Robot() {
-		name = generateName();
 		previousNames = new HashSet<>();
+		name = generateUniqueName();
 	}
 
 	public String getName() {
@@ -30,13 +30,16 @@ public class Robot {
 	}
 
 	public void reset() {
-		previousNames.add(name);
-		
-		String temp = generateName();
-		while (previousNames.contains(temp)) {
-			temp = generateName();
-		}
-		name = temp;
+		name = generateUniqueName();
+	}
+	
+	private String generateUniqueName() {
+		String name = generateName();
+    	while (previousNames.contains(name))
+    		name = generateName();
+    	
+    	previousNames.add(name);
+    	return name;
 	}
 
 	private String generateName() {
@@ -48,21 +51,12 @@ public class Robot {
 
 	private String generateRandomLetters(
 			final int rangeMin, final int rangeMax, final int sequenceLength, char offset) {
-		return generateSequenceFromMapper(rangeMin, rangeMax, sequenceLength, new IntFunction<String>() {
-			@Override
-			public String apply(int value) {
-				return String.valueOf((char) (value + offset));
-			}
-		});
+		return generateSequenceFromMapper(
+				rangeMin, rangeMax, sequenceLength, (value -> String.valueOf((char) (value + offset))));
 	}
 
 	private String generateRandomDigits(final int rangeMin, final int rangeMax, final int sequenceLength) {
-		return generateSequenceFromMapper(rangeMin, rangeMax, sequenceLength, new IntFunction<String>() {
-			@Override
-			public String apply(int value) {
-				return String.valueOf(value);
-			}
-		});
+		return generateSequenceFromMapper(rangeMin, rangeMax, sequenceLength, String::valueOf);
 	}
 
 	private String generateSequenceFromMapper(
