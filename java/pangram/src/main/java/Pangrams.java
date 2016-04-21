@@ -14,10 +14,8 @@ public class Pangrams {
                 .map(Character::new)
                 .collect(Collectors.toSet());
 
-        return IntStream.rangeClosed(LOWERCASE_A, LOWERCASE_Z)
+	return IntStream.rangeClosed(LOWERCASE_A, LOWERCASE_Z)
                 .mapToObj(i -> (char)i)
-                .map(characters::contains)
-                .reduce((b1, b2) -> b1 && b2)
-                .orElse(false);
+                .allMatch(characters::contains);
     }
 }
