@@ -67,4 +67,19 @@ public class SchoolTest {
 
     assertThat(school.sort()).isEqualTo(sortedStudents);
   }
+
+  @Test (expected = UnsupportedOperationException.class)
+  public void shouldNotAllowMutationWhenCallingDb() {
+    school.db().put(1, Arrays.asList("Matt"));
+  }
+
+  @Test (expected = UnsupportedOperationException.class)
+  public void shouldNotAllowMutationWhenCallingGrade() {
+    school.grade(1).add("Matt");
+  }
+
+  @Test (expected = UnsupportedOperationException.class)
+  public void shouldNotAllowMutationWhenCallingSort() {
+    school.sort().put(1, Arrays.asList("Matt"));
+  }
 }
