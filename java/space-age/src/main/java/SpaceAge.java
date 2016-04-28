@@ -9,9 +9,9 @@ public class SpaceAge {
     private static final double URANUS_ORBITAL_PERIOD = 84.016846;
     private static final double NEPTUNE_ORBITAL_PERIOD = 164.79132;
 
-    private final double seconds;
+    private final long seconds;
 
-    public SpaceAge(final double seconds) {
+    public SpaceAge(final long seconds) {
         this.seconds = seconds;
     }
 
