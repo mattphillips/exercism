@@ -2,10 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SchoolTest {
   private final School school = new School();
@@ -70,7 +67,7 @@ public class SchoolTest {
 
   @Test (expected = UnsupportedOperationException.class)
   public void shouldNotAllowMutationWhenCallingDb() {
-    school.db().put(1, Arrays.asList("Matt"));
+    school.db().put(1, new TreeSet<String>(Collections.singletonList("Matt")));
   }
 
   @Test (expected = UnsupportedOperationException.class)

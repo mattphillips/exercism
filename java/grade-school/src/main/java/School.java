@@ -4,34 +4,24 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class School {
 
-    private Map<Integer, List<String>> db = new HashMap<>();
+    private Map<Integer, Set<String>> db = new TreeMap<>();
 
-    public Map<Integer, List<String>> db() {
+    public Map<Integer, Set<String>> db() {
         return Collections.unmodifiableMap(db);
     }
 
     public void add(final String name, final int grade) {
-        if (db.containsKey(grade))
-            db.get(grade).add(name);
-        else
-            db.put(grade, new ArrayList<>(Collections.singletonList(name)));
+        db.computeIfAbsent(grade, k -> new TreeSet<>()).add(name);
     }
 
-    public List<String> grade(final int grade) {
-        return Collections.unmodifiableList(db.getOrDefault(grade, Collections.emptyList()));
+    public Set<String> grade(final int grade) {
+        return Collections.unmodifiableSet(db.getOrDefault(grade, Collections.emptySet()));
     }
 
     public Map<Integer, List<String>> sort() {
         return Collections.unmodifiableMap(
                 db.entrySet().stream()
-                        .map(entry ->
-                                new SimpleEntry<>(
-                                        entry.getKey(),
-                                        entry.getValue().stream()
-                                                .sorted()
-                                                .collect(Collectors.toList())
-                                )
-                        )
+                        .map(entry -> new SimpleEntry<>(entry.getKey(), new ArrayList<>(entry.getValue())))
                         .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue))
         );
     }
