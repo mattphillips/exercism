@@ -18,7 +18,7 @@ public class ScrabbleScoreTest {
         return Arrays.asList(new Object[][]{
                 {"", 0},
                 {" \t\n", 0},
-//                {null, 0},
+                {null, 0},
                 {"a", 1},
                 {"f", 4},
                 {"street", 6},
