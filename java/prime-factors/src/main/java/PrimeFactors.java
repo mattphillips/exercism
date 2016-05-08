@@ -16,17 +16,17 @@ public class PrimeFactors {
             final long divisor
     ) {
         if (isRemainderOne(naturalNumberRemainder))
-            return primeFactors;
+            return Collections.unmodifiableList(primeFactors);
 
         else if (isRemainderDivisibleByDivisor(naturalNumberRemainder, divisor))
-            return computePrimeFactors(
+            return Collections.unmodifiableList(computePrimeFactors(
                     new ArrayList<Long>(primeFactors) {{ add(divisor); }},
                     naturalNumberRemainder / divisor,
                     divisor
-            );
+            ));
 
         else
-            return computePrimeFactors(primeFactors, naturalNumberRemainder, divisor + 1);
+            return Collections.unmodifiableList(computePrimeFactors(primeFactors, naturalNumberRemainder, divisor + 1));
     }
 
     private static boolean isRemainderOne(final long remainingNaturalNumber) {
