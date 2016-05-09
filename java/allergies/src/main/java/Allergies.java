@@ -5,20 +5,20 @@ import java.util.stream.Stream;
 
 public class Allergies {
 
-    private final List<Allergen> list;
+    private final List<Allergen> allergens;
 
     public Allergies(final int score) {
-        list = Stream
+        allergens = Stream
                 .of(Allergen.values())
                 .filter(allergen -> (score & allergen.getScore()) == allergen.getScore())
                 .collect(Collectors.toList());
     }
 
     public boolean isAllergicTo(final Allergen allergen) {
-        return list.contains(allergen);
+        return allergens.contains(allergen);
     }
 
     public List<Allergen> getList() {
-        return Collections.unmodifiableList(list);
+        return Collections.unmodifiableList(allergens);
     }
 }
