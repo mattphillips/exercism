@@ -8,7 +8,7 @@ public class Accumulate {
         return map(collection, operation).collect(Collectors.toList());
     }
 
-    public static <T, R> Stream<R> map(final List<T> xs, final Function<T, R> f) {
+    private static <T, R> Stream<R> map(final List<T> xs, final Function<T, R> f) {
         if (xs.isEmpty())
             return Stream.empty();
 
