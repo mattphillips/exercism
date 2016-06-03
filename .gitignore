@@ -9,3 +9,4 @@ bin/
 .keep
 target/
 node_modules
+*.log
