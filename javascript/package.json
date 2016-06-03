@@ -4,7 +4,7 @@
   "description": "Write a program that greets the user by name, or by saying \"Hello, World!\" if no name is given.",
   "main": "hello-world.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
