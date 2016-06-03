@@ -8,3 +8,4 @@ bin/
 *.iml
 .keep
 target/
+node_modules
