@@ -1,9 +1,7 @@
 export default class HelloWorld {
-  constructor() {
-     this.helloPrefix = 'Hello,';
-  }
   hello(input) {
-    const reply = input ? `${this.helloPrefix} ${input}` : `${this.helloPrefix} World`
+    const helloPrefix = 'Hello,';
+    const reply = input ? `${helloPrefix} ${input}` : `${helloPrefix} World`
     return `${reply}!`;
   };
 }
