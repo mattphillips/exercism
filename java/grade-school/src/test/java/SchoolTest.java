@@ -7,6 +7,13 @@ import java.util.*;
 public class SchoolTest {
   private final School school = new School();
 
+  @Test (expected = UnsupportedOperationException.class)
+  public void gradeCannotBeModified() {
+    school.add("Aimee", 2);
+    school.db().get(2).add("Peter");
+    assertThat(school.grade(2)).hasSize(1);
+  }
+
   @Test
   public void startsWithNoStudents() {
     assertThat(school.db()).isEmpty();
