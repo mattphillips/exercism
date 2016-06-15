@@ -5,7 +5,7 @@ export default class Trinary {
 
   toDecimal() {
     return TRINARY.test(this.trinary)
-      ? [...this.trinary].reverse().reduce((total, b, index) => total + b * Math.pow(3, index), 0)
+      ? [...this.trinary].reverse().reduce((total, t, index) => total + t * Math.pow(3, index), 0)
       : 0;
   }
 }
