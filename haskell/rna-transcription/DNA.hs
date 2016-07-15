@@ -3,7 +3,7 @@ module DNA (toRNA) where
 import Data.List
 
 toRNA :: String -> Maybe String
-toRNA dna = sequence (map toRnaNucleotide dna)
+toRNA dna = mapM toRnaNucleotide dna
 
 toRnaNucleotide :: Char -> Maybe Char
 toRnaNucleotide 'G' = Just 'C'
